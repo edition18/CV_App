@@ -143,19 +143,13 @@ const App = () => {
         <label>Achievements</label>
         {achievements.map((achievement) => (
           <Fragment key={uniqid()}>
+            {console.log(achievements.indexOf(achievement))}
             <br></br>
             <input
               type="text"
               className="form-control"
               defaultValue={achievement}
             ></input>
-            {/* <button
-              className="btn btn-warning"
-              onClick={editAchievement}
-              id={id}
-            >
-              Edit Achievement
-            </button> */}
             <button
               className="btn btn-danger"
               id={achievements.indexOf(achievement)}
@@ -174,32 +168,29 @@ const App = () => {
     );
   };
   const addAchievement = (e) => {
-    console.log(e.target.id.split());
+    const practicalIndex = Number(e.target.parentNode.id);
+    setPracticals(
+      practicals.map((practical) =>
+        practicals.indexOf(practical) !== practicalIndex
+          ? practical
+          : (practical = {
+              ...practical,
+              achievements: practical.achievements.concat(""),
+            })
+      )
+    );
+    console.log(practicals);
   };
-  // const editAchievement = (e) => {};
+
+  const addPractical = () => {
+    const newPractical = new practicalDetails();
+    setPracticals([...educations, newPractical]);
+    // since it was an array of educations, we need to set it as an array as well
+  };
+
   const deleteAchievement = (e) => {
     let parentNodeIndex = Number(e.target.parentNode.id);
     let achievementIndex = Number(e.target.id);
-    console.log(achievementIndex);
-    //eseentially, keep all other practical the same
-    //practical that has a deletion, delete only that index
-
-    // console.log(achievementIndex);
-    // let test = practicals[parentNodeIndex].achievements.splice(
-    //   achievementIndex,
-    //   1
-    // );
-    // console.log(test);
-    // console.log(practicals[parentNodeIndex].achievements);
-
-    // const test = practicals.map((practical) =>
-    //   practicals.indexOf(practical) !== parentNodeIndex
-    //     ? practical
-    //     : practical.achievements.filter(
-    //         (achievement) =>
-    //           practical.achievements.indexOf(achievement) !== achievementIndex
-    //       )
-    // );
 
     setPracticals(
       practicals.map((practical) =>
@@ -215,21 +206,6 @@ const App = () => {
             })
       )
     );
-    // console.log(test);
-
-    // const testObject = practicals[parentNodeIndex];
-    // console.log(testObject);
-    // const newTestObject = testObject.map((property) => console.log(property));
-    // const test = practicals.map((practical) =>
-    //   practicals.indexOf(practical) !== parentNodeIndex
-    //     ? practical
-    //     : practical.achievements.filter(
-    //         (achievement) =>
-    //           practical.achievements.indexOf(achievement) !== achievementIndex
-    //       )
-    // );
-    // console.log(practicals);
-    // console.log(test);
   };
 
   const editEducation = (e) => {

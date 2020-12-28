@@ -141,9 +141,9 @@ const App = () => {
         <input type="text" id={"dateLeft"} defaultValue={dateLeft}></input>
         <br></br>
         <label>Achievements</label>
-        {achievements.map((achievement) => (
+        {achievements.map((achievement, index) => (
           <Fragment key={uniqid()}>
-            {console.log(achievements.indexOf(achievement))}
+            {console.log()}
             <br></br>
             <input
               type="text"
@@ -152,7 +152,7 @@ const App = () => {
             ></input>
             <button
               className="btn btn-danger"
-              id={achievements.indexOf(achievement)}
+              id={index}
               onClick={deleteAchievement}
             >
               Delete Achievement
@@ -169,13 +169,14 @@ const App = () => {
   };
   const addAchievement = (e) => {
     const practicalIndex = Number(e.target.parentNode.id);
+    const newAchievement = "";
     setPracticals(
       practicals.map((practical) =>
         practicals.indexOf(practical) !== practicalIndex
           ? practical
           : (practical = {
               ...practical,
-              achievements: practical.achievements.concat(""),
+              achievements: [...practical.achievements, newAchievement],
             })
       )
     );
@@ -304,8 +305,8 @@ const App = () => {
         <h1>Education</h1>
         <div className="educations">
           {educations
-            ? educations.map((education) =>
-                educationSubsection(educations.indexOf(education), education)
+            ? educations.map((education, index) =>
+                educationSubsection(index, education)
               )
             : ""}
         </div>
@@ -318,8 +319,8 @@ const App = () => {
         <h1>Practical Experience</h1>
         <div className="practicals">
           {practicals
-            ? practicals.map((practical) =>
-                practicalSubsection(practicals.indexOf(practical), practical)
+            ? practicals.map((practical, index) =>
+                practicalSubsection(index, practical)
               )
             : ""}
           <button onClick={checkPracticals}>Check Practicals</button>

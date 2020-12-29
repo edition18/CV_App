@@ -5,22 +5,22 @@ import React, { useState, Fragment } from "react";
 import uniqid from "uniqid";
 
 const App = () => {
-  const [submitted, setSubmitted] = useState(false);
-  const [name, setName] = useState("ed");
-  const [email, setEmail] = useState("e@gmail.com");
-  const [phone, setPhone] = useState("231431432");
+  const [submitted, setSubmitted] = useState(true);
+  const [name, setName] = useState("Generic Person");
+  const [email, setEmail] = useState("averagejoe@gmail.com");
+  const [phone, setPhone] = useState("9000 6898");
   const [educations, setEducations] = useState([
     {
-      school: "test school",
+      school: "Technology College",
       dateStarted: "2011-12-12",
       dateLeft: "2013-12-12",
-      major: "Tech",
+      major: "Technology",
     },
     {
-      school: "test school 2",
+      school: "Business College",
       dateStarted: "2014-12-12",
       dateLeft: "2018-12-12",
-      major: "Biz",
+      major: "Business",
     },
   ]);
   const [practicals, setPracticals] = useState([
@@ -55,22 +55,16 @@ const App = () => {
   }
 
   function practicalDetails(
-    school = "",
+    employer = "",
     dateStarted = "",
     dateLeft = "",
     achievements = []
   ) {
-    this.school = school;
+    this.employer = employer;
     this.dateStarted = dateStarted;
     this.dateLeft = dateLeft;
     this.achievements = achievements;
   }
-
-  // A section to add general information like name, email, phone number.
-  const onSubmitTask = (e) => {
-    e.preventDefault();
-    console.log(e);
-  };
 
   const handleGeneralChange = (e) => {
     switch (e.target.id) {
@@ -104,12 +98,7 @@ const App = () => {
       <Fragment key={uniqid()}>
         <div id={id}>
           <label>School</label>
-          <input
-            type="text"
-            id={"school"}
-            defaultValue={school}
-            onChange={handleEducationChange}
-          ></input>
+          <input type="text" id={"school"} defaultValue={school}></input>
           <label>Date Started</label>
           <input
             type="date"
@@ -151,7 +140,7 @@ const App = () => {
         <br></br>
         <label>Achievements</label>
         {achievements.map((achievement, index) => (
-          <Fragment key={uniqid()}>
+          <div className="achievements" key={uniqid()}>
             <br></br>
             <input
               type="text"
@@ -166,7 +155,7 @@ const App = () => {
             >
               Delete Achievement
             </button>
-          </Fragment>
+          </div>
         ))}
         <br></br>
         <button className="btn btn-success" onClick={addAchievement}>
@@ -189,7 +178,6 @@ const App = () => {
             })
       )
     );
-    console.log(practicals);
   };
 
   const addPractical = () => {
@@ -220,13 +208,14 @@ const App = () => {
     const educationsIndex = Number(e.target.parentNode.id);
     const propName = e.target.id;
     console.log(educations);
-    setEducations(
-      educations.map((education, index) =>
-        index !== educationsIndex
-          ? education
-          : (education = { ...education, school: e.target.value })
-      )
-    );
+
+    // setEducations(
+    //   educations.map((education, index) =>
+    //     index !== educationsIndex
+    //       ? education
+    //       : (education = { ...education, school: e.target.value })
+    //   )
+    // );
     console.log(educations);
   };
 
@@ -274,32 +263,62 @@ const App = () => {
 
   const submitForm = (e) => {
     e.preventDefault();
-
+    let newEducationArray = [];
     //educations
     //create a educationDetail for each index in educations
     for (let i = 0; i < educations.length; i++) {
-      let newEducationArray = [];
       newEducationArray.push(new educationDetails());
     }
 
     const educationsChildNodes = document.getElementById("educations")
       .childNodes;
     for (let i = 0; i < educationsChildNodes.length; i++) {
-      console.log(educationsChildNodes[i].parentNode);
-      // educationsChildNodes[i].tagName ==! "INPUT" ? "" :
-      // newEducationArray
+      const educationsSubdiv = educationsChildNodes[i].childNodes;
+      for (let x = 0; x < educationsSubdiv.length; x++) {
+        if (educationsSubdiv[x].tagName !== "INPUT") {
+        } else {
+          newEducationArray[i][educationsSubdiv[x].id] =
+            educationsSubdiv[x].value;
+        }
+      }
     }
 
+    setEducations(newEducationArray);
     // document.getElementById("educations").childNodes;
 
-    // //
-    // //practicals
-    //create a educationDetail for each index in practicals
-    // if id include " " , means its an achievement, populate to the right practical and achievement
+    //
+    //practicals
+    // create a educationDetail for each index in practicals
+
+    let newPracticalArray = [];
     for (let i = 0; i < practicals.length; i++) {
-      let newPracticalArray = [];
       newPracticalArray.push(new practicalDetails());
     }
+
+    const practicalsChildNodes = document.getElementById("practicals")
+      .childNodes;
+    for (let i = 0; i < practicalsChildNodes.length; i++) {
+      const practicalSubdiv = practicalsChildNodes[i].childNodes;
+      for (let x = 0; x < practicalSubdiv.length; x++) {
+        if (practicalSubdiv[x].tagName !== "INPUT") {
+          if (practicalSubdiv[x].tagName === "DIV") {
+            const subdivAchievements = practicalSubdiv[x].childNodes;
+            for (let y = 0; y < subdivAchievements.length; y++) {
+              if (subdivAchievements[y].tagName === "INPUT") {
+                newPracticalArray[i].achievements.push(
+                  subdivAchievements[y].value
+                );
+              }
+            }
+          }
+        } else {
+          newPracticalArray[i][practicalSubdiv[x].id] =
+            practicalSubdiv[x].value;
+        }
+      }
+    }
+    setPracticals(newPracticalArray);
+    // if element include className achievements go into it and loop out the achievements
     // document.getElementById("practicals").childNodes;
   };
 
@@ -307,7 +326,7 @@ const App = () => {
   const form = (
     <Fragment>
       <button onClick={toggleFormActive}>Show Form</button>
-      <form id="form" onSubmit={onSubmitTask}>
+      <form id="form" className="hideElement" onSubmit={submitForm}>
         {/* general section */}
         <h1>General Information</h1>
         <div className="formgroup">
@@ -360,7 +379,7 @@ const App = () => {
           Add New Education
         </button>
         <br></br>
-        <button onClick={checkEducations}>Check Education</button>
+
         <br></br>
         <h1>Practical Experience</h1>
         <div id="practicals">
@@ -372,14 +391,11 @@ const App = () => {
           <button className="btn btn-primary" onClick={addPractical}>
             Add New Practical
           </button>
-          <button onClick={checkPracticals}>Check Practicals</button>
         </div>
 
         <br></br>
         <br></br>
-        <button type="submit" onClick={submitForm}>
-          Submit Form
-        </button>
+        <button type="submit">Submit Form</button>
       </form>
     </Fragment>
   );
@@ -392,15 +408,20 @@ const App = () => {
   return (
     <div>
       {form}
-      <button onClick={toggle}>Test</button>
+      <button onClick={checkEducations}>Check Educations</button>
+      <button onClick={checkPracticals}>Check Practicals</button>
       {submitted === false ? (
         ""
       ) : (
-        <Fragment>
-          <Education educations={educations} />
-          <Practical practicals={practicals} />
+        <div className="shadow p-3 mb-5 bg-light rounded">
           <General name={name} email={email} phone={phone} />
-        </Fragment>
+          {educations.map((education) => (
+            <Education key={uniqid()} education={education} />
+          ))}
+          {practicals.map((practical) => (
+            <Practical key={uniqid()} practical={practical} />
+          ))}
+        </div>
       )}
     </div>
   );

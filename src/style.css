@@ -1,3 +1,17 @@
 .hideElement {
   display: none;
 }
+
+* {
+  /* border-radius: 0.01px;
+  border-color: black;
+  border-style: dotted; */
+}
+
+.floatRight {
+  float: right;
+}
+
+.inlineBlock {
+  display: inline-block;
+}

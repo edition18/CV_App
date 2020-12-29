@@ -1,20 +1,20 @@
 {
   "files": {
-    "main.css": "/CV-App/static/css/main.81ac0cab.chunk.css",
-    "main.js": "/CV-App/static/js/main.4e527e72.chunk.js",
-    "main.js.map": "/CV-App/static/js/main.4e527e72.chunk.js.map",
-    "runtime-main.js": "/CV-App/static/js/runtime-main.f552c774.js",
-    "runtime-main.js.map": "/CV-App/static/js/runtime-main.f552c774.js.map",
-    "static/css/2.95f25948.chunk.css": "/CV-App/static/css/2.95f25948.chunk.css",
-    "static/js/2.b918bb37.chunk.js": "/CV-App/static/js/2.b918bb37.chunk.js",
-    "static/js/2.b918bb37.chunk.js.map": "/CV-App/static/js/2.b918bb37.chunk.js.map",
-    "index.html": "/CV-App/index.html",
-    "static/css/2.95f25948.chunk.css.map": "/CV-App/static/css/2.95f25948.chunk.css.map",
-    "static/css/main.81ac0cab.chunk.css.map": "/CV-App/static/css/main.81ac0cab.chunk.css.map",
-    "static/js/2.b918bb37.chunk.js.LICENSE.txt": "/CV-App/static/js/2.b918bb37.chunk.js.LICENSE.txt"
+    "main.css": "/CV_App/static/css/main.81ac0cab.chunk.css",
+    "main.js": "/CV_App/static/js/main.4e527e72.chunk.js",
+    "main.js.map": "/CV_App/static/js/main.4e527e72.chunk.js.map",
+    "runtime-main.js": "/CV_App/static/js/runtime-main.fafef814.js",
+    "runtime-main.js.map": "/CV_App/static/js/runtime-main.fafef814.js.map",
+    "static/css/2.95f25948.chunk.css": "/CV_App/static/css/2.95f25948.chunk.css",
+    "static/js/2.b918bb37.chunk.js": "/CV_App/static/js/2.b918bb37.chunk.js",
+    "static/js/2.b918bb37.chunk.js.map": "/CV_App/static/js/2.b918bb37.chunk.js.map",
+    "index.html": "/CV_App/index.html",
+    "static/css/2.95f25948.chunk.css.map": "/CV_App/static/css/2.95f25948.chunk.css.map",
+    "static/css/main.81ac0cab.chunk.css.map": "/CV_App/static/css/main.81ac0cab.chunk.css.map",
+    "static/js/2.b918bb37.chunk.js.LICENSE.txt": "/CV_App/static/js/2.b918bb37.chunk.js.LICENSE.txt"
   },
   "entrypoints": [
-    "static/js/runtime-main.f552c774.js",
+    "static/js/runtime-main.fafef814.js",
     "static/css/2.95f25948.chunk.css",
     "static/js/2.b918bb37.chunk.js",
     "static/css/main.81ac0cab.chunk.css",
